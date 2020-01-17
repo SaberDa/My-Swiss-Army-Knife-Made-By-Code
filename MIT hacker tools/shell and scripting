@@ -1,0 +1,114 @@
+常用指令
+mv filename filenameNew  重命名指令
+cp file filecopy         复制指令
+rm filename              删除文件指令
+    rm 的返回值：0表示成功，1表示失败
+    用 echo $? 查询上一个rm指令的返回值
+rmdir name               删除文件夹指令
+
+使用shell进行编程
+1. 新建新的sh文件
+    vim run.sh
+2. 在该sh文件的第一行编写
+    #!/bin/sh
+3. 保存退出，输入chmod指令使该文件可执行
+    chmod +x run.sh
+4. 执行该文件
+    ./run.sh
+
+查找当前环境变量所在位置
+    which name
+
+在 "#!/../.." 中调用 "Program Files"
+    #!/c/PROGRA~1/
+
+Working with shell:
+1. Run a command a bunch of times
+    在命令行输入
+    for i in $(seq 1 5); do echo hello; done
+    &
+    seq 1 5
+2. 批量打印当前目录下文件
+    for f in $(ls); do echo $f; done
+3. 给变量赋值并打印
+    fpp=foo
+    echo $fpp
+        PS: Do not write "fpp = foo"
+            in this sitution, the interperter will understand
+            as "run the program fpp with the first argument = 
+            and second argument bar"
+4. 使用$符号传值
+    在run.sh文件中：
+    使用 $0 表示该程序自身
+    使用 $1 表示第一个值
+    eg: 
+        #!/bin/sh
+        echo $0
+        echo $1
+        echo $2
+    run:
+        ./run.sh a b
+    show:
+        ./run.sh
+        a 
+        b 
+    使用 $# 表示一共传几个argument
+    使用 $$ 表示shell本身的PID（ProcessID）
+    使用 $! 表示shell最后运行的Process的PID
+    使用 $? 表示最后运行的命令的结束代码
+    使用 $- 表示Set命令设定的Flag一览
+    使用 $* 表示所有的参数列表
+        如使用 $* 用 ["] 括起来的情况
+        以 "$1 $2 ... $n" 的形式输出所有参数
+    使用 $@ 表示所有的参数列表 
+        如使用 $@ 用 ["] 括起来的情况 
+        以 "$1" "$2" ... "$n" 的形式输出所有参数
+5. 使用 ls -la 查看当前所有状态
+    eg:
+        $ ls -la
+        total 10
+        drwxr-xr-x 1 Saberda 197121  0 Jan  9 18:10 ./
+        drwxr-xr-x 1 Saberda 197121  0 Jan  9 17:20 ../
+        drwxr-xr-x 1 Saberda 197121  0 Jan  9 18:10 dir1/
+        drwxr-xr-x 1 Saberda 197121  0 Jan  9 18:10 dir2/
+        -rw-r--r-- 1 Saberda 197121  0 Jan  9 17:20 foo
+        -rw-r--r-- 1 Saberda 197121  0 Jan  9 17:20 foobar
+        -rw-r--r-- 1 Saberda 197121  0 Jan  9 17:21 foobar2
+        -rwxr-xr-x 1 Saberda 197121 45 Jan  9 17:47 run.py*
+        -rwxr-xr-x 1 Saberda 197121 34 Jan  9 18:05 run.sh*
+    eg:
+    输出当前文件夹下所有可执行的文件
+        $ for f in $(ls); do if test -x $f; then echo filename $f; fi; done
+        filename dir1/
+        filename dir2/
+        filename run.py
+        filename run.sh
+6. echo 的使用技巧
+    echo * 表示输出所有文件
+    echo ??? 表示输出3个字符文件名的文件
+    echo r* 表示输出所有带r的文件
+    echo {b,r}* 表示输出所有带b和r的文件
+   ls 同理
+7. 输出带空格或者其他字符的可执行文件
+    for f in *; do if [ -x "$f" ]; then echo filename "$f"; fi; done
+8. a | b
+    运行a的同时运行b，将a的所有输出作为b的输入，并最后输出b的结果
+9. cat指令
+    将你的输入作为其他的输出，或者只是单纯的一个输出指令
+    通常用于查看某个文件的所有内容
+    cat > filename 表示创建一个新的文件，并进行编辑，按ctrl+D结束编辑并保存退出
+    cat file1 file2 > file 表示将file1和file2合并到file
+    cat < filename 输出当前文件内容
+    cat < file1 > file2 将文件1的内容作为输入，输入到文件2
+10. 任务挂起和后台前台切换
+    首先在server中写下需要执行的操作
+    ./server 表示直接在前台运行
+    ./server & 表示在后台运行
+    jobs 可查看当前运行的服务和运行状态
+    fg %1 表示将后台执行的第一个服务转移到前台运行
+    bg %1 表示将前台执行的第一个服务转移到后台运行
+    ctrl + z 表示暂停当前服务
+    ctrl + c 表示停止当前服务
+11. disown 指令可以在用户登出或者shell被关闭下仍然执行后台任务
+
+

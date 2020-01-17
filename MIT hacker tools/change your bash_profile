@@ -1,0 +1,19 @@
+open Git Bash
+input cd to the home directory 
+then 
+    touch .bashrc
+    vim .bashrc
+input the change you want in this file
+note the right grammer
+then 
+    source .bashrc
+
+
+Example:
+Add "man" into Git Bash
+    cd
+    touch .bashrc
+    vim .bashrc
+        man(){ $1 ==help; }
+    source .bashrc
+Then you can use the "man" in your git bash

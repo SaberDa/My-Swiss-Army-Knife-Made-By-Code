@@ -1,0 +1,13 @@
+nullptr
+
+nullptr是为了代替NULL
+传统C++会把NULL和0归为同一种东西
+有些编译器会将NULL定义为 ((void*)0)，有些就是0
+
+nullptr用来区分空指针和0
+nullptr的类型为nullptr_t，能够隐式转换为任何指针或者成员指针的类型
+也能进行相等或者不等的比较
+
+当需要使用NULL时，请直接使用nullptr
+
+例子见文件 nullptr.cpp

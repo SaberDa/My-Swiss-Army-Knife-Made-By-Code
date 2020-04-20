@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-namespace sead {
+namespace seed {
     class Random {
     public:
         void init();
@@ -75,7 +75,7 @@ namespace sead {
         *seed4 = mContext[3];
     }
 
-} // namespace sead
+} // namespace seed
 
 uint32_t pf(float f) {
     return *((uint32_t *)&f);
@@ -90,7 +90,7 @@ struct Cabbage {
     void calculate();
 
     // utility stuff for testing
-    sead::Random rng;
+    seed::Random rng;
     bool randbool() {
         return rng.getU32() & 0x80000000;
     }

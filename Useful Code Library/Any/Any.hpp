@@ -34,6 +34,11 @@ private:
         T m_value;
     };
 
+    BasePtr clone() const {
+        if (m_basePtr != nullptr) return m_basePtr->clone();
+        return nullptr;
+    }
+
     BasePtr m_basePtr;
     std::type_index m_typeIndex;
 };

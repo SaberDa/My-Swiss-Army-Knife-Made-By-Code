@@ -20,10 +20,18 @@ private:
         virtual BasePtr clone() const = 0;
     };
 
-    template<typename U>
-    class Derived : public Base {
+    template<typename T>
+    class Derived : public Base
+    {
     public:
-        
+        template<typename U>
+        Derived(U&& value) : m_value(std::forward<U>(value)) {}
+
+        virtual BasePtr clone() const override {
+            return BasePtr(new Derived<T>(m_value));
+        }
+
+        T m_value;
     };
 
     BasePtr m_basePtr;

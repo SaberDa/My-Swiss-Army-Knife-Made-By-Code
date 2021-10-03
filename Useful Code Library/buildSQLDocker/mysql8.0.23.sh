@@ -10,5 +10,5 @@ docker run \
 -v /Users/saberda/Documents/Code/PPManage/mysql8.0.23/data:/var/lib/mysql \
 -v /Users/saberda/Documents/Code/PPManage/PatientPortalServer-main/sql:/home \
 -v /etc/localtime:/etc/localtime \
--e MYSQL_ROOT_PASSWORD=L456456lgd \
+-e MYSQL_ROOT_PASSWORD=password \
 -d mysql:8.0.23
